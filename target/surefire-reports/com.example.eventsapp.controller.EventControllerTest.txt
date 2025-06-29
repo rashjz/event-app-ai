@@ -1,52 +1,22 @@
 -------------------------------------------------------------------------------
 Test set: com.example.eventsapp.controller.EventControllerTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.241 s <<< FAILURE! - in com.example.eventsapp.controller.EventControllerTest
-updateEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'categoryRepository' defined in com.example.eventsapp.repository.CategoryRepository defined in @EnableJpaRepositories declared on App: Cannot create inner bean '(inner bean)#16ea544e' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#16ea544e': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#16ea544e': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+Tests run: 8, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.141 s <<< FAILURE! - in com.example.eventsapp.controller.EventControllerTest
+updateEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0.005 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Event not found with id: 999
+	at com.example.eventsapp.controller.EventControllerTest.updateEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:127)
+Caused by: java.lang.RuntimeException: Event not found with id: 999
+	at com.example.eventsapp.controller.EventControllerTest.updateEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:127)
 
-createEvent_WithValidEvent_ShouldReturnCreatedEvent  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'categoryRepository' defined in com.example.eventsapp.repository.CategoryRepository defined in @EnableJpaRepositories declared on App: Cannot create inner bean '(inner bean)#8eb1297' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#8eb1297': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#8eb1297': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+getEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0.001 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Event not found with id: 999
+	at com.example.eventsapp.controller.EventControllerTest.getEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:82)
+Caused by: java.lang.RuntimeException: Event not found with id: 999
+	at com.example.eventsapp.controller.EventControllerTest.getEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:82)
 
-deleteEvent_WithValidId_ShouldReturnNoContent  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'categoryRepository' defined in com.example.eventsapp.repository.CategoryRepository defined in @EnableJpaRepositories declared on App: Cannot create inner bean '(inner bean)#6ed1fdb7' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#6ed1fdb7': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#6ed1fdb7': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-
-updateEvent_WithValidEvent_ShouldReturnUpdatedEvent  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'eventRepository' defined in com.example.eventsapp.repository.EventRepository defined in @EnableJpaRepositories declared on App: Cannot create inner bean '(inner bean)#2e0e1acf' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#2e0e1acf': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#2e0e1acf': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-
-getEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'categoryRepository' defined in com.example.eventsapp.repository.CategoryRepository defined in @EnableJpaRepositories declared on App: Cannot create inner bean '(inner bean)#46fdb4d' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#46fdb4d': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#46fdb4d': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-
-getAllEvents_ShouldReturnEventsList  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'eventRepository' defined in com.example.eventsapp.repository.EventRepository defined in @EnableJpaRepositories declared on App: Cannot create inner bean '(inner bean)#4ce824a7' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#4ce824a7': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#4ce824a7': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-
-getEvent_WithValidId_ShouldReturnEvent  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'categoryRepository' defined in com.example.eventsapp.repository.CategoryRepository defined in @EnableJpaRepositories declared on App: Cannot create inner bean '(inner bean)#12c53d97' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#12c53d97': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#12c53d97': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-
-deleteEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'eventRepository' defined in com.example.eventsapp.repository.EventRepository defined in @EnableJpaRepositories declared on App: Cannot create inner bean '(inner bean)#156b3428' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#156b3428': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#156b3428': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+deleteEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0.002 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Event not found with id: 999
+	at com.example.eventsapp.controller.EventControllerTest.deleteEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:147)
+Caused by: java.lang.RuntimeException: Event not found with id: 999
+	at com.example.eventsapp.controller.EventControllerTest.deleteEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:147)
 

@@ -1,14 +1,14 @@
 -- Create categories
-INSERT INTO category (name, description, color) VALUES 
-('travel', 'Travel and transportation related events', '#3498db'),
-('entertainment', 'Entertainment and leisure activities', '#e74c3c'),
-('sports', 'Sports and fitness events', '#2ecc71'),
-('education', 'Educational and learning events', '#f39c12'),
-('food', 'Food and dining experiences', '#e67e22'),
-('music', 'Music concerts and performances', '#9b59b6'),
-('art', 'Art and cultural events', '#34495e'),
-('business', 'Business and professional events', '#1abc9c'),
-('technology', 'Technology and innovation events', '#95a5a6');
+INSERT INTO category (name) VALUES 
+('travel'),
+('entertainment'),
+('sports'),
+('education'),
+('food'),
+('music'),
+('art'),
+('business'),
+('technology');
 
 -- Create events with category references
 INSERT INTO EVENT (type, title, description, date, image, category_id) 

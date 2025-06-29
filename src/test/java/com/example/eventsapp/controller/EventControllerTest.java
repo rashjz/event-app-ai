@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -79,7 +80,8 @@ public class EventControllerTest {
     void getEvent_WithInvalidId_ShouldThrowException() throws Exception {
         when(eventService.getEvent(999L)).thenThrow(new RuntimeException("Event not found with id: 999"));
         mockMvc.perform(get("/api/events/999"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException))
+                .andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("Event not found with id: 999")));
         verify(eventService, times(1)).getEvent(999L);
     }
 
@@ -125,7 +127,8 @@ public class EventControllerTest {
         mockMvc.perform(put("/api/events/999")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updatedEvent)))
-                .andExpect(status().isInternalServerError());
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException))
+                .andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("Event not found with id: 999")));
         verify(eventService, times(1)).updateEvent(any(Event.class));
     }
 
@@ -142,7 +145,8 @@ public class EventControllerTest {
         doThrow(new RuntimeException("Event not found with id: 999"))
                 .when(eventService).deleteEvent(999L);
         mockMvc.perform(delete("/api/events/999"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException))
+                .andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("Event not found with id: 999")));
         verify(eventService, times(1)).deleteEvent(999L);
     }
 } 

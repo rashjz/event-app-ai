@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,7 +68,8 @@ public class CategoryControllerTest {
     void getCategory_WithInvalidId_ShouldThrowException() throws Exception {
         when(categoryService.getCategory(999L)).thenThrow(new RuntimeException("Category not found with id: 999"));
         mockMvc.perform(get("/api/categories/999"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException))
+                .andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("Category not found with id: 999")));
         verify(categoryService, times(1)).getCategory(999L);
     }
 
@@ -86,7 +88,8 @@ public class CategoryControllerTest {
     void getCategoryByName_WithInvalidName_ShouldThrowException() throws Exception {
         when(categoryService.getCategoryByName("InvalidCategory")).thenThrow(new RuntimeException("Category not found with name: InvalidCategory"));
         mockMvc.perform(get("/api/categories/name/InvalidCategory"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException))
+                .andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("Category not found with name: InvalidCategory")));
         verify(categoryService, times(1)).getCategoryByName("InvalidCategory");
     }
 
@@ -126,7 +129,8 @@ public class CategoryControllerTest {
         mockMvc.perform(put("/api/categories/999")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updatedCategory)))
-                .andExpect(status().isInternalServerError());
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException))
+                .andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("Category not found with id: 999")));
         verify(categoryService, times(1)).updateCategory(any(Category.class));
     }
 
@@ -143,7 +147,8 @@ public class CategoryControllerTest {
         doThrow(new RuntimeException("Category not found with id: 999"))
                 .when(categoryService).deleteCategory(999L);
         mockMvc.perform(delete("/api/categories/999"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException))
+                .andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("Category not found with id: 999")));
         verify(categoryService, times(1)).deleteCategory(999L);
     }
 } 
