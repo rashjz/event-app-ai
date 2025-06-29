@@ -1,0 +1,44 @@
+<div class="event-detail-container" *ngIf="event">
+  <div class="event-header">
+    <button class="back-button" (click)="goBack()">← Back to Events</button>
+    <h1>{{ event.title }}</h1>
+  </div>
+  
+  <div class="event-content">
+    <div class="event-image-container">
+      <img [src]="event.image || 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&h=600&fit=crop'" 
+           [alt]="event.title"
+           (error)="onImageError($event)">
+    </div>
+    
+    <div class="event-info">
+      <div class="event-meta">
+        <span class="event-type">{{ event.type }}</span>
+        <span class="event-category" *ngIf="event.category">{{ getCategoryName(event.category) }}</span>
+        <span class="event-date">{{ event.date }}</span>
+      </div>
+      
+      <div class="event-description">
+        <h3>About this event</h3>
+        <p>{{ event.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="loading" *ngIf="!event">
+  Loading event details...
+</div>
+
+<div class="error-message" *ngIf="error">
+  {{ error }}
+</div>
+
+<div class="loading-spinner" *ngIf="loading">
+  <div class="spinner"></div>
+  <p>Loading event details...</p>
+</div>
+
+<div class="event-detail-card" *ngIf="!loading && event">
+
+</div> 

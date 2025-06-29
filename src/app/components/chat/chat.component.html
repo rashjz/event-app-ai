@@ -1,0 +1,50 @@
+<div class="chat-container">
+  <div class="chat-header">
+    <h3>AI Assistant</h3>
+    <button class="clear-btn" (click)="clearChat()" title="Clear chat">
+      🗑️
+    </button>
+  </div>
+
+  <div class="messages-container">
+    <div 
+      class="message" 
+      *ngFor="let message of messages"
+      [ngClass]="{'user-message': message.isUser, 'ai-message': !message.isUser}"
+    >
+      <div class="message-content">
+        <div class="message-text">{{ message.text }}</div>
+        <div class="message-time">
+          {{ message.timestamp | date:'shortTime' }}
+        </div>
+      </div>
+    </div>
+
+    <div class="loading-message" *ngIf="loading">
+      <div class="typing-indicator">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <span>AI is thinking...</span>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <textarea
+      [(ngModel)]="message"
+      (keypress)="onKeyPress($event)"
+      placeholder="Type your message here..."
+      [disabled]="loading"
+      class="message-input"
+      rows="2"
+    ></textarea>
+    <button 
+      (click)="sendMessage()" 
+      [disabled]="!message.trim() || loading"
+      class="send-btn"
+    >
+      {{ loading ? 'Sending...' : 'Send' }}
+    </button>
+  </div>
+</div> 

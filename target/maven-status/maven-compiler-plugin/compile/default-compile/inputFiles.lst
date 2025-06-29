@@ -1,0 +1,11 @@
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/controller/EventController.java
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/service/CategoryService.java
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/controller/ChatController.java
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/repository/EventRepository.java
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/service/EventService.java
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/repository/CategoryRepository.java
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/controller/CategoryController.java
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/model/Event.java
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/JpaConfig.java
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/model/Category.java
+/Users/Rashad_Javadov/events-backend/src/main/java/com/example/eventsapp/App.java

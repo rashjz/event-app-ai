@@ -1,0 +1,132 @@
+.event-detail-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.event-header {
+  margin-bottom: 30px;
+}
+
+.back-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background: #0056b3;
+}
+
+.event-header h1 {
+  color: #333;
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.event-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.event-image-container {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-image-container img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.event-meta {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.event-type {
+  background: #007bff;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.event-category {
+  background: #28a745;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.event-date {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.event-description h3 {
+  color: #333;
+  margin: 0 0 15px 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.event-description p {
+  color: #555;
+  line-height: 1.7;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .event-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .event-header h1 {
+    font-size: 2rem;
+  }
+  
+  .event-image-container img {
+    height: 300px;
+  }
+  
+  .event-meta {
+    gap: 10px;
+  }
+}

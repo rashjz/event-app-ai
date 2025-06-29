@@ -1,0 +1,44 @@
+<div class="main-container">
+  <header class="main-header">
+    <div class="header-content">
+      
+      <!-- Category Filter -->
+      <div class="category-filter">
+        <div class="category-tabs">
+          <div 
+            class="category-tab" 
+            [class.active]="!selectedCategory"
+            (click)="selectCategory(null)">
+            <div class="tab-icon">🏠</div>
+            <div class="tab-content">
+              <div class="tab-name">All Categories</div>
+              <div class="tab-count">{{ categories.length }} total</div>
+            </div>
+          </div>
+          
+          <div 
+            class="category-tab" 
+            *ngFor="let category of categories; let i = index"
+            [class.active]="selectedCategory?.id === category.id"
+            (click)="selectCategory(category)"
+            [style.animation-delay]="(i * 0.1) + 's'">
+            <div class="tab-icon" [style.background-color]="category.color">📂</div>
+            <div class="tab-content">
+              <div class="tab-name">{{ category.name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="events-section">
+      <app-events-list [selectedCategory]="selectedCategory"></app-events-list>
+    </div>
+    
+    <div class="chat-section">
+      <app-chat></app-chat>
+    </div>
+  </div>
+</div> 
