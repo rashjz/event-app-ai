@@ -152,3 +152,6 @@ jspm_packages/
 
 # TernJS port file
 .tern-port
+
+# Angular specific cache files
+.angular/cache/
