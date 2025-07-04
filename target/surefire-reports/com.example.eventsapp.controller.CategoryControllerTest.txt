@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: com.example.eventsapp.controller.CategoryControllerTest
 -------------------------------------------------------------------------------
-Tests run: 10, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.204 s <<< FAILURE! - in com.example.eventsapp.controller.CategoryControllerTest
+Tests run: 10, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.209 s <<< FAILURE! - in com.example.eventsapp.controller.CategoryControllerTest
 deleteCategory_WithInvalidId_ShouldThrowException  Time elapsed: 0.008 s  <<< ERROR!
 org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Category not found with id: 999
 	at com.example.eventsapp.controller.CategoryControllerTest.deleteCategory_WithInvalidId_ShouldThrowException(CategoryControllerTest.java:149)
@@ -14,13 +14,13 @@ org.springframework.web.util.NestedServletException: Request processing failed; 
 Caused by: java.lang.RuntimeException: Category not found with name: InvalidCategory
 	at com.example.eventsapp.controller.CategoryControllerTest.getCategoryByName_WithInvalidName_ShouldThrowException(CategoryControllerTest.java:90)
 
-getCategory_WithInvalidId_ShouldThrowException  Time elapsed: 0.001 s  <<< ERROR!
+getCategory_WithInvalidId_ShouldThrowException  Time elapsed: 0.002 s  <<< ERROR!
 org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Category not found with id: 999
 	at com.example.eventsapp.controller.CategoryControllerTest.getCategory_WithInvalidId_ShouldThrowException(CategoryControllerTest.java:70)
 Caused by: java.lang.RuntimeException: Category not found with id: 999
 	at com.example.eventsapp.controller.CategoryControllerTest.getCategory_WithInvalidId_ShouldThrowException(CategoryControllerTest.java:70)
 
-updateCategory_WithInvalidId_ShouldThrowException  Time elapsed: 0.001 s  <<< ERROR!
+updateCategory_WithInvalidId_ShouldThrowException  Time elapsed: 0.002 s  <<< ERROR!
 org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Category not found with id: 999
 	at com.example.eventsapp.controller.CategoryControllerTest.updateCategory_WithInvalidId_ShouldThrowException(CategoryControllerTest.java:129)
 Caused by: java.lang.RuntimeException: Category not found with id: 999

@@ -1,20 +1,20 @@
 -------------------------------------------------------------------------------
 Test set: com.example.eventsapp.controller.EventControllerTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.141 s <<< FAILURE! - in com.example.eventsapp.controller.EventControllerTest
+Tests run: 8, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.147 s <<< FAILURE! - in com.example.eventsapp.controller.EventControllerTest
 updateEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0.005 s  <<< ERROR!
 org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Event not found with id: 999
 	at com.example.eventsapp.controller.EventControllerTest.updateEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:127)
 Caused by: java.lang.RuntimeException: Event not found with id: 999
 	at com.example.eventsapp.controller.EventControllerTest.updateEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:127)
 
-getEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0.001 s  <<< ERROR!
+getEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0.002 s  <<< ERROR!
 org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Event not found with id: 999
 	at com.example.eventsapp.controller.EventControllerTest.getEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:82)
 Caused by: java.lang.RuntimeException: Event not found with id: 999
 	at com.example.eventsapp.controller.EventControllerTest.getEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:82)
 
-deleteEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0.002 s  <<< ERROR!
+deleteEvent_WithInvalidId_ShouldThrowException  Time elapsed: 0.001 s  <<< ERROR!
 org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Event not found with id: 999
 	at com.example.eventsapp.controller.EventControllerTest.deleteEvent_WithInvalidId_ShouldThrowException(EventControllerTest.java:147)
 Caused by: java.lang.RuntimeException: Event not found with id: 999

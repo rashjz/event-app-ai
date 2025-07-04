@@ -1,22 +1,22 @@
 -------------------------------------------------------------------------------
 Test set: com.example.eventsapp.EventsAppIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.627 s <<< FAILURE! - in com.example.eventsapp.EventsAppIntegrationTest
+Tests run: 14, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.666 s <<< FAILURE! - in com.example.eventsapp.EventsAppIntegrationTest
 getEvent_WithInvalidId_ShouldReturnError  Time elapsed: 0.017 s  <<< ERROR!
 org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Event not found with id: 999
-	at com.example.eventsapp.EventsAppIntegrationTest.getEvent_WithInvalidId_ShouldReturnError(EventsAppIntegrationTest.java:98)
+	at com.example.eventsapp.EventsAppIntegrationTest.getEvent_WithInvalidId_ShouldReturnError(EventsAppIntegrationTest.java:99)
 Caused by: java.lang.RuntimeException: Event not found with id: 999
-	at com.example.eventsapp.EventsAppIntegrationTest.getEvent_WithInvalidId_ShouldReturnError(EventsAppIntegrationTest.java:98)
+	at com.example.eventsapp.EventsAppIntegrationTest.getEvent_WithInvalidId_ShouldReturnError(EventsAppIntegrationTest.java:99)
 
 deleteCategory_WithValidId_ShouldDeleteCategory  Time elapsed: 0.019 s  <<< ERROR!
 org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Category not found with id: 13
-	at com.example.eventsapp.EventsAppIntegrationTest.deleteCategory_WithValidId_ShouldDeleteCategory(EventsAppIntegrationTest.java:206)
+	at com.example.eventsapp.EventsAppIntegrationTest.deleteCategory_WithValidId_ShouldDeleteCategory(EventsAppIntegrationTest.java:211)
 Caused by: java.lang.RuntimeException: Category not found with id: 13
-	at com.example.eventsapp.EventsAppIntegrationTest.deleteCategory_WithValidId_ShouldDeleteCategory(EventsAppIntegrationTest.java:206)
+	at com.example.eventsapp.EventsAppIntegrationTest.deleteCategory_WithValidId_ShouldDeleteCategory(EventsAppIntegrationTest.java:211)
 
 deleteEvent_WithValidId_ShouldDeleteEvent  Time elapsed: 0.012 s  <<< ERROR!
 org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.RuntimeException: Event not found with id: 9
-	at com.example.eventsapp.EventsAppIntegrationTest.deleteEvent_WithValidId_ShouldDeleteEvent(EventsAppIntegrationTest.java:145)
+	at com.example.eventsapp.EventsAppIntegrationTest.deleteEvent_WithValidId_ShouldDeleteEvent(EventsAppIntegrationTest.java:148)
 Caused by: java.lang.RuntimeException: Event not found with id: 9
-	at com.example.eventsapp.EventsAppIntegrationTest.deleteEvent_WithValidId_ShouldDeleteEvent(EventsAppIntegrationTest.java:145)
+	at com.example.eventsapp.EventsAppIntegrationTest.deleteEvent_WithValidId_ShouldDeleteEvent(EventsAppIntegrationTest.java:148)
 
