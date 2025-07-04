@@ -1,6 +1,7 @@
 package com.example.eventsapp;
 
 import com.example.eventsapp.model.Event;
+import com.example.eventsapp.config.JpaConfig;
 import com.example.eventsapp.model.Category;
 import com.example.eventsapp.repository.EventRepository;
 import com.example.eventsapp.repository.CategoryRepository;

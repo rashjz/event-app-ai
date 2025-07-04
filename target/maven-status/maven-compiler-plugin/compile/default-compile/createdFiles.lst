@@ -1,10 +1,10 @@
-com/example/eventsapp/controller/ChatController.class
-com/example/eventsapp/controller/EventController.class
-com/example/eventsapp/service/EventService.class
-com/example/eventsapp/repository/CategoryRepository.class
 com/example/eventsapp/controller/CategoryController.class
 com/example/eventsapp/repository/EventRepository.class
 com/example/eventsapp/model/Event.class
 com/example/eventsapp/model/Category.class
 com/example/eventsapp/service/CategoryService.class
 com/example/eventsapp/App.class
+com/example/eventsapp/controller/ChatController.class
+com/example/eventsapp/controller/EventController.class
+com/example/eventsapp/service/EventService.class
+com/example/eventsapp/repository/CategoryRepository.class

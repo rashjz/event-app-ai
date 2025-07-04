@@ -1,4 +1,4 @@
-package com.example.eventsapp;
+package com.example.eventsapp.config; 
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;
