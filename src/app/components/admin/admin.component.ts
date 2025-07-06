@@ -35,17 +35,17 @@ export class AdminComponent implements OnInit {
   }
 
   loadEvents(): void {
-    this.eventService.getEvents().subscribe(
-      events => this.events = events,
-      error => console.error('Error loading events:', error)
-    );
+    this.eventService.getEvents().subscribe({
+      next: (events) => this.events = events,
+      error: (error) => console.error('Error loading events:', error)
+    });
   }
 
   loadCategories(): void {
-    this.categoryService.getAllCategories().subscribe(
-      categories => this.categories = categories,
-      error => console.error('Error loading categories:', error)
-    );
+    this.categoryService.getAllCategories().subscribe({
+      next: (categories) => this.categories = categories,
+      error: (error) => console.error('Error loading categories:', error)
+    });
   }
 
   setActiveTab(tab: 'events' | 'categories'): void {
@@ -74,45 +74,45 @@ export class AdminComponent implements OnInit {
 
   deleteEvent(event: Event): void {
     if (confirm(`Are you sure you want to delete "${event.title}"?`)) {
-      this.eventService.deleteEvent(event.id!).subscribe(
-        () => {
+      this.eventService.deleteEvent(event.id!).subscribe({
+        next: () => {
           this.loadEvents();
           alert('Event deleted successfully!');
         },
-        error => {
+        error: (error) => {
           console.error('Error deleting event:', error);
           alert('Error deleting event. Please try again.');
         }
-      );
+      });
     }
   }
 
   saveEvent(): void {
     if (this.isAdding) {
-      this.eventService.createEvent(this.newEvent).subscribe(
-        () => {
+      this.eventService.createEvent(this.newEvent).subscribe({
+        next: () => {
           this.loadEvents();
           this.isAdding = false;
           alert('Event added successfully!');
         },
-        error => {
+        error: (error) => {
           console.error('Error adding event:', error);
           alert('Error adding event. Please try again.');
         }
-      );
+      });
     } else if (this.isEditing && this.selectedEvent) {
-      this.eventService.updateEvent(this.selectedEvent.id!, this.selectedEvent).subscribe(
-        () => {
+      this.eventService.updateEvent(this.selectedEvent.id!, this.selectedEvent).subscribe({
+        next: () => {
           this.loadEvents();
           this.isEditing = false;
           this.selectedEvent = null;
           alert('Event updated successfully!');
         },
-        error => {
+        error: (error) => {
           console.error('Error updating event:', error);
           alert('Error updating event. Please try again.');
         }
-      );
+      });
     }
   }
 

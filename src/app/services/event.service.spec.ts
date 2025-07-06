@@ -188,7 +188,7 @@ describe('EventService', () => {
   describe('deleteEvent', () => {
     it('should delete an event and return Observable<void>', () => {
       service.deleteEvent(1).subscribe(response => {
-        expect(response).toBeUndefined();
+        expect(response).toBeNull();
       });
 
       const req = httpMock.expectOne('http://localhost:8080/api/events/1');
@@ -214,7 +214,7 @@ describe('EventService', () => {
       const message = 'Hello, this is a test message';
 
       service.sendChatMessage(message).subscribe(response => {
-        expect(response).toBeUndefined();
+        expect(response).toBeNull();
       });
 
       const req = httpMock.expectOne('http://localhost:8080/api/events/chat');

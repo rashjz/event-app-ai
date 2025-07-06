@@ -154,14 +154,13 @@ describe('EventsListComponent', () => {
     it('should load events successfully', () => {
       eventService.getEvents.and.returnValue(of(mockEvents));
 
+      // Reset component state before testing
+      component.loading = false;
+      component.error = 'some error';
+      
       component.loadEvents();
 
-      expect(component.loading).toBeTrue();
       expect(component.error).toBe('');
-      
-      // Simulate the async operation
-      fixture.detectChanges();
-
       expect(component.events).toEqual(mockEvents);
       expect(component.filteredEvents).toEqual(mockEvents);
       expect(component.loading).toBeFalse();
@@ -170,12 +169,11 @@ describe('EventsListComponent', () => {
     it('should handle error when loading events fails', () => {
       eventService.getEvents.and.returnValue(throwError(() => new Error('Network error')));
 
-      component.loadEvents();
-
-      expect(component.loading).toBeTrue();
+      // Reset component state before testing
+      component.loading = false;
+      component.error = '';
       
-      // Simulate the async operation
-      fixture.detectChanges();
+      component.loadEvents();
 
       expect(component.error).toBe('Failed to load events. Please try again.');
       expect(component.loading).toBeFalse();

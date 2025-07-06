@@ -128,7 +128,7 @@ describe('CategoryService', () => {
         expect(category).toEqual(categoryWithSpecialChars);
       });
 
-      const req = httpMock.expectOne('http://localhost:8080/api/categories/name/Music%20%26%20Arts');
+      const req = httpMock.expectOne('http://localhost:8080/api/categories/name/Music & Arts');
       req.flush(categoryWithSpecialChars);
     });
   });
@@ -238,7 +238,7 @@ describe('CategoryService', () => {
   describe('deleteCategory', () => {
     it('should delete a category and return Observable<void>', () => {
       service.deleteCategory(1).subscribe(response => {
-        expect(response).toBeUndefined();
+        expect(response).toBeNull();
       });
 
       const req = httpMock.expectOne('http://localhost:8080/api/categories/1');

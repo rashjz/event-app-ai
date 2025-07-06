@@ -42,18 +42,22 @@ describe('AppComponent', () => {
   it('should have proper CSS classes', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const appElement = compiled.querySelector('.app');
+    const appElement = compiled.querySelector('.app-container');
     expect(appElement).toBeTruthy();
   });
 
   it('should be responsive', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const appElement = compiled.querySelector('.app') as HTMLElement;
+    const appElement = compiled.querySelector('.app-container') as HTMLElement;
     
     // Check if the component has responsive styles
-    const styles = window.getComputedStyle(appElement);
-    expect(styles).toBeDefined();
+    if (appElement) {
+      const styles = window.getComputedStyle(appElement);
+      expect(styles).toBeDefined();
+    } else {
+      expect(appElement).toBeTruthy();
+    }
   });
 
   it('should have proper accessibility attributes', () => {
@@ -114,7 +118,7 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     
     // Check that component has proper encapsulation
-    const componentElement = compiled.querySelector('.app');
+    const componentElement = compiled.querySelector('.app-container');
     expect(componentElement).toBeTruthy();
   });
 
