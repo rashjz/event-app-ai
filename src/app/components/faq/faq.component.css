@@ -1,0 +1,26 @@
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.faq-list {
+  margin-top: 20px;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.faq-item h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.faq-item p {
+  margin-bottom: 0;
+  color: #666;
+}

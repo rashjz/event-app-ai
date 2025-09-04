@@ -1,0 +1,15 @@
+.terms-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.terms-content h2 {
+  margin-top: 30px;
+  color: #333;
+}
+
+.terms-content p {
+  line-height: 1.6;
+  color: #666;
+}

@@ -1,4 +1,9 @@
 <div class="admin-container">
+  <!-- Back to Website Link -->
+  <div class="admin-header">
+    <a routerLink="/" class="back-link">← Back to Website</a>
+  </div>
+
   <!-- Navigation Tabs -->
   <div class="admin-tabs">
     <button 
@@ -162,4 +167,4 @@
   <div *ngIf="activeTab === 'categories'" class="tab-content">
     <app-category-management></app-category-management>
   </div>
-</div> 
+</div>

@@ -11,11 +11,17 @@ import { ChatComponent } from './components/chat/chat.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { CategoryManagementComponent } from './components/category-management/category-management.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'event/:id', component: EventDetailComponent },
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent },
+  { path: 'faq', component: FaqComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'terms-conditions', component: TermsConditionsComponent }
 ];
 
 @NgModule({
@@ -26,7 +32,10 @@ const routes: Routes = [
     ChatComponent,
     MainPageComponent,
     AdminComponent,
-    CategoryManagementComponent
+    CategoryManagementComponent,
+    FaqComponent,
+    PrivacyPolicyComponent,
+    TermsConditionsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,4 +46,4 @@ const routes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { } 
+export class AppModule { }
