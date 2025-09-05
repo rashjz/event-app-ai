@@ -155,26 +155,5 @@ jspm_packages/
 
 # Angular specific cache files
 .angular/cache/
-target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
-target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
-target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
-target/surefire-reports/2025-06-29T19-21-19_949.dumpstream
-target/surefire-reports/2025-06-29T19-25-00_387.dumpstream
-target/surefire-reports/2025-06-29T19-29-19_979.dumpstream
-target/surefire-reports/2025-06-29T19-34-03_537.dumpstream
-target/surefire-reports/com.example.eventsapp.AppTest.txt
-target/surefire-reports/com.example.eventsapp.controller.CategoryControllerTest.txt
-target/surefire-reports/com.example.eventsapp.controller.EventControllerTest.txt
-target/surefire-reports/com.example.eventsapp.EventsAppIntegrationTest.txt
-target/surefire-reports/com.example.eventsapp.service.CategoryServiceTest.txt
-target/surefire-reports/TEST-com.example.eventsapp.AppTest.xml
-target/surefire-reports/TEST-com.example.eventsapp.controller.CategoryControllerTest.xml
-target/surefire-reports/TEST-com.example.eventsapp.controller.EventControllerTest.xml
-target/surefire-reports/TEST-com.example.eventsapp.EventsAppIntegrationTest.xml
-target/surefire-reports/TEST-com.example.eventsapp.service.CategoryServiceTest.xml
-target/surefire-reports/TEST-com.example.eventsapp.service.EventServiceTest.xml
-target/test-classes/com/example/eventsapp/EventsAppIntegrationTest.class
-.angular/cache/16.2.16/angular-webpack/909444497b2f26efbc9097fc169a8458c5e3f54f/8.pack
-.angular/cache/16.2.16/angular-webpack/909444497b2f26efbc9097fc169a8458c5e3f54f/9.pack
-.angular/cache/16.2.16/angular-webpack/909444497b2f26efbc9097fc169a8458c5e3f54f/index.pack
-.angular/cache/16.2.16/angular-webpack/909444497b2f26efbc9097fc169a8458c5e3f54f/index.pack.old
+target/*
+.angular/*
