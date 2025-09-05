@@ -1,3 +1,6 @@
+/* Quill Editor Styles */
+@import '~quill/dist/quill.snow.css';
+
 /* Global styles */
 * {
   box-sizing: border-box;
@@ -104,4 +107,4 @@ code {
   .container {
     padding: 1rem;
   }
-} 
+}

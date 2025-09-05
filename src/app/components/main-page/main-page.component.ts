@@ -13,6 +13,7 @@ export class MainPageComponent implements OnInit {
   categories: Category[] = [];
   selectedCategory: Category | null = null;
   loading = false;
+  menuOpen = false;
 
   constructor(private categoryService: CategoryService) {}
 
@@ -46,4 +47,12 @@ export class MainPageComponent implements OnInit {
     // This will be called when an event is added through chat
     // We can refresh the events list here if needed
   }
-} 
+
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu(): void {
+    this.menuOpen = false;
+  }
+}

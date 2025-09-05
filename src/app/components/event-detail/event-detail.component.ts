@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/event.service';
+import { CategoryService } from '../../services/category.service';
 import { Event } from '../../models/event';
 import { Category } from '../../models/category';
 
@@ -13,11 +14,15 @@ export class EventDetailComponent implements OnInit {
   event: Event | null = null;
   loading = false;
   error = '';
+  menuOpen = false;
+  categories: Category[] = [];
+  selectedCategory: Category | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private eventService: EventService
+    private eventService: EventService,
+    private categoryService: CategoryService
   ) { }
 
   ngOnInit(): void {
@@ -66,4 +71,20 @@ export class EventDetailComponent implements OnInit {
   getCategoryName(category: Category | undefined): string {
     return category ? category.name : '';
   }
-} 
+
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu(): void {
+    this.menuOpen = false;
+  }
+
+  selectCategory(category: Category | null): void {
+    this.selectedCategory = category;
+  }
+
+  goToMainPage(): void {
+    this.router.navigate(['/']);
+  }
+}

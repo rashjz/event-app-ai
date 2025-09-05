@@ -24,6 +24,29 @@ export class AdminComponent implements OnInit {
     image: ''
   };
 
+  quillConfig = {
+    theme: 'snow',
+    modules: {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'script': 'sub'}, { 'script': 'super' }],
+        [{ 'indent': '-1'}, { 'indent': '+1' }],
+        [{ 'direction': 'rtl' }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        ['clean']
+      ]
+    },
+    placeholder: 'Enter event description...',
+    readOnly: false,
+    bounds: document.body
+  };
+
   constructor(
     private eventService: EventService,
     private categoryService: CategoryService
@@ -129,4 +152,4 @@ export class AdminComponent implements OnInit {
   getCategoryName(category: Category | undefined): string {
     return category ? category.name : '-';
   }
-} 
+}

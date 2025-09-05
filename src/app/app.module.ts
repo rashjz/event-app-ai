@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
+import { QuillModule } from 'ngx-quill';
+
 import { AppComponent } from './app.component';
 import { EventsListComponent } from './components/events-list/events-list.component';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
@@ -41,7 +43,8 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    QuillModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -40,7 +40,7 @@
           </div>
         </div>
         <p class="event-date">{{ event.date }}</p>
-        <p class="event-description">{{ event.description | slice:0:150 }}...</p>
+        <p class="event-description" [innerHTML]="event.description"></p>
       </div>
     </div>
   </div>
@@ -54,4 +54,4 @@
       No events found. Try adding some events through the chat!
     </p>
   </div>
-</div> 
+</div>

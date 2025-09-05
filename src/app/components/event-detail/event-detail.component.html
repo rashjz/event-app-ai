@@ -1,3 +1,52 @@
+<!-- Modern Navigation Menu -->
+<nav class="modern-nav">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <h1 class="brand-title">Events App</h1>
+      <div class="brand-accent"></div>
+    </div>
+
+    <div class="nav-menu">
+      <div class="menu-toggle" (click)="toggleMenu()">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </div>
+
+      <div class="menu-overlay" [class.active]="menuOpen" (click)="closeMenu()"></div>
+
+      <div class="menu-content" [class.open]="menuOpen">
+        <div class="menu-header">
+          <h2>Categories</h2>
+          <button class="close-btn" (click)="closeMenu()">&times;</button>
+        </div>
+
+        <div class="menu-items">
+          <div
+            class="menu-item"
+            [class.active]="!selectedCategory"
+            (click)="selectCategory(null); closeMenu(); goToMainPage()">
+            <div class="item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              </svg>
+            </div>
+            <div class="item-content">
+              <div class="item-title">All Categories</div>
+              <div class="item-subtitle">Browse all events</div>
+            </div>
+            <div class="item-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
 <div class="event-detail-container" *ngIf="event">
   <div class="event-header">
     <button class="back-button" (click)="goBack()">← Back to Events</button>
@@ -20,7 +69,7 @@
       
       <div class="event-description">
         <h3>About this event</h3>
-        <p>{{ event.description }}</p>
+        <p [innerHTML]="event.description"></p>
       </div>
     </div>
   </div>
@@ -41,4 +90,4 @@
 
 <div class="event-detail-card" *ngIf="!loading && event">
 
-</div> 
+</div>

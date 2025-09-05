@@ -13,21 +13,27 @@
 
 .events-header h2 {
   margin: 0;
-  color: #2d3748;
-  font-size: 1.8rem;
+  color: #1e293b;
+  font-size: 2rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .event-count {
   font-size: 1rem;
-  color: #718096;
-  font-weight: 400;
-  background: #f7fafc;
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1px solid #e2e8f0;
+  color: #64748b;
+  font-weight: 500;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  padding: 6px 16px;
+  border-radius: 25px;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 .refresh-btn {
@@ -209,4 +215,4 @@ h2 {
     flex-direction: row;
     gap: 8px;
   }
-} 
+}
