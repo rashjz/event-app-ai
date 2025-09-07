@@ -35,7 +35,7 @@ VALUES ((SELECT id FROM event_type WHERE name = 'Theatre'), 'Amazing Scavenger H
 
 -- Add more diverse events
 INSERT INTO EVENT (event_type_id, title, description, date, image, category_id)
-VALUES ((SELECT id FROM event_type WHERE name = 'concert'), 'Summer Music Festival - Philadelphia',
+VALUES ((SELECT id FROM event_type WHERE name = 'Concert'), 'Summer Music Festival - Philadelphia',
 'Experience the ultimate summer music extravaganza at the Philadelphia Summer Music Festival! Featuring world-renowned artists from various genres including pop, rock, indie, and electronic music. This three-day festival will take place at the beautiful Benjamin Franklin Parkway with multiple stages, food vendors, and interactive art installations. Don''t miss performances by top artists that will create unforgettable memories under the summer sky. Tickets include access to all stages, complimentary water stations, and shuttle service from downtown Philadelphia.',
 '2025-08-20',
 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=600&fit=crop',
