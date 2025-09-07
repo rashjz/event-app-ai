@@ -72,6 +72,10 @@ export class EventDetailComponent implements OnInit {
     return category ? category.name : '';
   }
 
+  getEventTypeName(eventType: any): string {
+    return eventType ? eventType.name : '';
+  }
+
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }

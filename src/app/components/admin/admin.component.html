@@ -6,17 +6,23 @@
 
   <!-- Navigation Tabs -->
   <div class="admin-tabs">
-    <button 
-      class="tab-button" 
+    <button
+      class="tab-button"
       [class.active]="activeTab === 'events'"
       (click)="setActiveTab('events')">
       Event Management
     </button>
-    <button 
-      class="tab-button" 
+    <button
+      class="tab-button"
       [class.active]="activeTab === 'categories'"
       (click)="setActiveTab('categories')">
       Category Management
+    </button>
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'event-types'"
+      (click)="setActiveTab('event-types')">
+      Event Type Management
     </button>
   </div>
 
@@ -47,22 +53,23 @@
 
         <div class="form-row">
           <div class="form-group">
-            <label for="type">Type</label>
-            <select 
-              id="type" 
-              name="type"
-              [(ngModel)]="isAdding ? newEvent.type : selectedEvent!.type"
+            <label for="eventType">Event Type</label>
+            <select
+              id="eventType"
+              name="eventType"
+              [(ngModel)]="isAdding ? newEvent.eventType : selectedEvent!.eventType"
               class="form-control">
-              <option value="event">Event</option>
-              <option value="concert">Concert</option>
-              <option value="movie">Movie</option>
+              <option [ngValue]="undefined">Select Event Type</option>
+              <option *ngFor="let eventType of eventTypes" [ngValue]="eventType">
+                {{ eventType.name }}
+              </option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="category">Category</label>
-            <select 
-              id="category" 
+            <select
+              id="category"
               name="category"
               [(ngModel)]="isAdding ? newEvent.category : selectedEvent!.category"
               class="form-control">
@@ -141,7 +148,8 @@
             <td>{{ event.id }}</td>
             <td>{{ event.title }}</td>
             <td>
-              <span class="event-type-badge">{{ event.type }}</span>
+              <span class="event-type-badge" *ngIf="event.eventType">{{ getEventTypeName(event.eventType) }}</span>
+              <span class="no-category" *ngIf="!event.eventType">-</span>
             </td>
             <td>
               <span class="event-category-badge" *ngIf="event.category">{{ getCategoryName(event.category) }}</span>
@@ -170,5 +178,74 @@
   <!-- Category Management Tab -->
   <div *ngIf="activeTab === 'categories'" class="tab-content">
     <app-category-management></app-category-management>
+  </div>
+
+  <!-- Event Type Management Tab -->
+  <div *ngIf="activeTab === 'event-types'" class="tab-content">
+    <div class="admin-header">
+      <h1>Event Type Management</h1>
+      <button class="add-button" (click)="addEventType()" *ngIf="!isAddingEventType && !isEditingEventType">
+        + Add New Event Type
+      </button>
+    </div>
+
+    <!-- Add/Edit Form -->
+    <div class="form-container" *ngIf="isAddingEventType || isEditingEventType">
+      <h2>{{ isAddingEventType ? 'Add New Event Type' : 'Edit Event Type' }}</h2>
+
+      <form (ngSubmit)="saveEventType()" #eventTypeForm="ngForm">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            [(ngModel)]="isAddingEventType ? newEventType.name : selectedEventType!.name"
+            [required]="true"
+            class="form-control">
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="save-button" [disabled]="!eventTypeForm.form.valid">
+            {{ isAddingEventType ? 'Add Event Type' : 'Update Event Type' }}
+          </button>
+          <button type="button" class="cancel-button" (click)="cancel()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Event Types List -->
+    <div class="events-table" *ngIf="!isAddingEventType && !isEditingEventType">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let eventType of eventTypes">
+            <td>{{ eventType.id }}</td>
+            <td>{{ eventType.name }}</td>
+            <td class="actions">
+              <button class="edit-button" (click)="editEventType(eventType)">
+                Edit
+              </button>
+              <button class="delete-button" (click)="deleteEventType(eventType)">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="eventTypes.length === 0 && !isAddingEventType && !isEditingEventType">
+      <p>No event types found. Click "Add New Event Type" to create your first event type.</p>
+    </div>
   </div>
 </div>

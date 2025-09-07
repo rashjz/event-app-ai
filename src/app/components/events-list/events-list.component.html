@@ -1,7 +1,18 @@
 <div class="events-container">
   <div class="events-header">
     <h2>
-      {{ selectedCategory ? selectedCategory.name + ' Events' : 'All Events' }}
+      <span *ngIf="selectedEventTypeName && selectedCategory">
+        {{ selectedEventTypeName }} Events in {{ selectedCategory.name }}
+      </span>
+      <span *ngIf="selectedEventTypeName && !selectedCategory">
+        {{ selectedEventTypeName }} Events
+      </span>
+      <span *ngIf="!selectedEventTypeName && selectedCategory">
+        {{ selectedCategory.name }} Events
+      </span>
+      <span *ngIf="!selectedEventTypeName && !selectedCategory">
+        All Events
+      </span>
       <span class="event-count" *ngIf="filteredEvents.length > 0">
         ({{ filteredEvents.length }} event{{ filteredEvents.length !== 1 ? 's' : '' }})
       </span>
@@ -35,7 +46,8 @@
         <div class="event-header">
           <h3>{{ event.title }}</h3>
           <div class="event-badges">
-            <span class="event-type">{{ event.type }}</span>
+            <span class="event-type" *ngIf="event.eventType">{{ getEventTypeName(event.eventType) }}</span>
+            <span class="event-type" *ngIf="!event.eventType">-</span>
             <span class="event-category" *ngIf="event.category">{{ getCategoryName(event.category) }}</span>
           </div>
         </div>

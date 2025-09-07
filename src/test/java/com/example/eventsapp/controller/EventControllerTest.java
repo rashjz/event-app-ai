@@ -45,7 +45,6 @@ public class EventControllerTest {
         testEvent = new Event();
         testEvent.setId(1L);
         testEvent.setTitle("Test Concert");
-        testEvent.setType("concert");
         testEvent.setDescription("A test concert");
         testEvent.setDate("2024-12-25");
         testEvent.setImage("test-image.jpg");
@@ -60,8 +59,7 @@ public class EventControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].title").value("Test Concert"))
-                .andExpect(jsonPath("$[0].type").value("concert"));
+                .andExpect(jsonPath("$[0].title").value("Test Concert"));
         verify(eventService, times(1)).getAllEvents();
     }
 
@@ -89,7 +87,6 @@ public class EventControllerTest {
     void createEvent_WithValidEvent_ShouldReturnCreatedEvent() throws Exception {
         Event newEvent = new Event();
         newEvent.setTitle("New Event");
-        newEvent.setType("movie");
         newEvent.setDescription("A new event");
         newEvent.setDate("2024-12-26");
         when(eventService.createEvent(any(Event.class))).thenReturn(testEvent);
@@ -106,7 +103,6 @@ public class EventControllerTest {
     void updateEvent_WithValidEvent_ShouldReturnUpdatedEvent() throws Exception {
         Event updatedEvent = new Event();
         updatedEvent.setTitle("Updated Event");
-        updatedEvent.setType("event");
         updatedEvent.setDescription("An updated event");
         updatedEvent.setDate("2024-12-27");
         when(eventService.updateEvent(any(Event.class))).thenReturn(testEvent);
@@ -149,4 +145,4 @@ public class EventControllerTest {
                 .andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("Event not found with id: 999")));
         verify(eventService, times(1)).deleteEvent(999L);
     }
-} 
+}

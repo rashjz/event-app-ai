@@ -39,7 +39,6 @@ public class EventServiceTest {
         testEvent = new Event();
         testEvent.setId(1L);
         testEvent.setTitle("Test Concert");
-        testEvent.setType("concert");
         testEvent.setDescription("A test concert");
         testEvent.setDate("2024-12-25");
         testEvent.setImage("test-image.jpg");
@@ -95,7 +94,6 @@ public class EventServiceTest {
         // Arrange
         Event newEvent = new Event();
         newEvent.setTitle("New Event");
-        newEvent.setType("movie");
         newEvent.setDescription("A new event");
         newEvent.setDate("2024-12-26");
 
@@ -116,7 +114,6 @@ public class EventServiceTest {
         Event updatedEvent = new Event();
         updatedEvent.setId(1L);
         updatedEvent.setTitle("Updated Event");
-        updatedEvent.setType("event");
         updatedEvent.setDescription("An updated event");
         updatedEvent.setDate("2024-12-27");
 
@@ -205,4 +202,4 @@ public class EventServiceTest {
         assertTrue(actualEvents.isEmpty());
         verify(eventRepository, times(1)).findAll();
     }
-} 
+}

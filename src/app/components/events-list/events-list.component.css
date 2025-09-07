@@ -26,14 +26,14 @@
 }
 
 .event-count {
-  font-size: 1rem;
-  color: #64748b;
-  font-weight: 500;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-  padding: 6px 16px;
+  font-size: 0.95rem;
+  color: #4c51bf;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  padding: 8px 18px;
   border-radius: 25px;
-  border: 1px solid rgba(102, 126, 234, 0.2);
-  backdrop-filter: blur(10px);
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
 }
 
 .refresh-btn {

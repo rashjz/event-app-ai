@@ -7,7 +7,9 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String type; // movie, concert, event
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "event_type_id")
+    private EventType eventType;
     private String title;
     
     @Column(length = 20000)
@@ -25,8 +27,8 @@ public class Event {
     // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public EventType getEventType() { return eventType; }
+    public void setEventType(EventType eventType) { this.eventType = eventType; }
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
     public String getDescription() { return description; }
@@ -37,4 +39,4 @@ public class Event {
     public void setImage(String image) { this.image = image; }
     public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
-} 
+}

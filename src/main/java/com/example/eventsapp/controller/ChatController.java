@@ -19,7 +19,7 @@ public class ChatController {
         // Simple logic: if message contains "add", add a new event
         if (message.toLowerCase().contains("add")) {
             Event event = new Event();
-            event.setType("custom");
+            // Note: eventType should be set via EventType entity, but for simplicity:
             event.setTitle("User Requested Event");
             event.setDescription(message);
             event.setDate("TBD");
@@ -32,4 +32,4 @@ public class ChatController {
     public String getStatus() {
         return "Chat service is running";
     }
-} 
+}

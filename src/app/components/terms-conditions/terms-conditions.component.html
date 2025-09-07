@@ -17,23 +17,20 @@
 
       <div class="menu-content" [class.open]="menuOpen">
         <div class="menu-header">
-          <h2>Categories</h2>
+          <h2>Menu</h2>
           <button class="close-btn" (click)="closeMenu()">&times;</button>
         </div>
 
         <div class="menu-items">
-          <div
-            class="menu-item"
-            [class.active]="!selectedCategory"
-            (click)="selectCategory(null); closeMenu(); goToMainPage()">
+          <div class="menu-item" (click)="goToMainPage(); closeMenu()">
             <div class="item-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
               </svg>
             </div>
             <div class="item-content">
-              <div class="item-title">All Categories</div>
-              <div class="item-subtitle">Browse all events</div>
+              <div class="item-title">Home</div>
+              <div class="item-subtitle">Back to main page</div>
             </div>
             <div class="item-arrow">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">

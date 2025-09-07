@@ -61,7 +61,7 @@ public class EventsAppIntegrationTest {
         // Create test event
         testEvent = new Event();
         testEvent.setTitle("Test Event");
-        testEvent.setType("concert");
+        // Note: eventType should be set via EventType entity, but for simplicity in tests:
         testEvent.setDescription("A test event for integration testing");
         testEvent.setDate("2024-12-25");
         testEvent.setImage("test-image.jpg");
@@ -80,8 +80,7 @@ public class EventsAppIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].id").value(testEvent.getId()))
-                .andExpect(jsonPath("$[0].title").value("Test Event"))
-                .andExpect(jsonPath("$[0].type").value("concert"));
+                .andExpect(jsonPath("$[0].title").value("Test Event"));
     }
 
     @Test
@@ -104,10 +103,9 @@ public class EventsAppIntegrationTest {
     void createEvent_WithValidData_ShouldCreateAndReturnEvent() throws Exception {
         Event newEvent = new Event();
         newEvent.setTitle("New Integration Event");
-        newEvent.setType("movie");
         newEvent.setDescription("A new event created through integration test");
         newEvent.setDate("2024-12-26");
-        
+
         // Create a new category without ID to avoid detached entity error
         Category newCategory = new Category();
         newCategory.setName("New Category for Event");
@@ -117,15 +115,13 @@ public class EventsAppIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(newEvent)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("New Integration Event"))
-                .andExpect(jsonPath("$.type").value("movie"));
+                .andExpect(jsonPath("$.title").value("New Integration Event"));
     }
 
     @Test
     void updateEvent_WithValidData_ShouldUpdateAndReturnEvent() throws Exception {
         Event updatedEvent = new Event();
         updatedEvent.setTitle("Updated Integration Event");
-        updatedEvent.setType("event");
         updatedEvent.setDescription("An updated event through integration test");
         updatedEvent.setDate("2024-12-27");
         updatedEvent.setCategory(testCategory);
@@ -217,10 +213,9 @@ public class EventsAppIntegrationTest {
         // Create event with a new category (without ID to avoid detached entity error)
         Event newEvent = new Event();
         newEvent.setTitle("Event with New Category");
-        newEvent.setType("event");
         newEvent.setDescription("An event with a newly created category");
         newEvent.setDate("2024-12-28");
-        
+
         Category newCategory = new Category();
         newCategory.setName("New Category for Event");
         newEvent.setCategory(newCategory);
@@ -232,4 +227,4 @@ public class EventsAppIntegrationTest {
                 .andExpect(jsonPath("$.title").value("Event with New Category"))
                 .andExpect(jsonPath("$.category.name").value("New Category for Event"));
     }
-} 
+}

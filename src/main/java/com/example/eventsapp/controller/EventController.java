@@ -40,4 +40,9 @@ public class EventController {
     public void deleteEvent(@PathVariable Long id) {
         service.deleteEvent(id);
     }
-} 
+
+    @GetMapping("/event-type/{eventTypeId}")
+    public List<Event> getEventsByEventType(@PathVariable Long eventTypeId) {
+        return service.getEventsByEventType(eventTypeId);
+    }
+}

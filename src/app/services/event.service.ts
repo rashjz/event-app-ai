@@ -34,4 +34,8 @@ export class EventService {
   sendChatMessage(message: string): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/chat`, message);
   }
-} 
+
+  getEventsByEventType(eventTypeId: number): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.apiUrl}/event-type/${eventTypeId}`);
+  }
+}

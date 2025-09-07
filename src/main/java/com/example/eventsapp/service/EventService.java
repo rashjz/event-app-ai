@@ -39,4 +39,8 @@ public class EventService {
         }
         repository.deleteById(id);
     }
-} 
+
+    public List<Event> getEventsByEventType(Long eventTypeId) {
+        return repository.findByEventTypeId(eventTypeId);
+    }
+}

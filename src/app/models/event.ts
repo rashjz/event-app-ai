@@ -1,11 +1,12 @@
 import { Category } from './category';
+import { EventType } from './event-type';
 
 export interface Event {
   id?: number;
-  type: string;
+  eventType?: EventType;
   title: string;
   description: string;
   date: string;
   image?: string;
   category?: Category;
-} 
+}

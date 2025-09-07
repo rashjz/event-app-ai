@@ -11,7 +11,9 @@ import { Category } from '../../models/category';
 })
 export class EventsListComponent implements OnInit, OnChanges {
   @Input() selectedCategory: Category | null = null;
-  
+  @Input() selectedEventTypeId: number | null = null;
+  @Input() selectedEventTypeName: string | null = null;
+
   events: Event[] = [];
   filteredEvents: Event[] = [];
   loading = false;
@@ -27,7 +29,7 @@ export class EventsListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['selectedCategory']) {
+    if (changes['selectedCategory'] || changes['selectedEventTypeId']) {
       this.filterEvents();
     }
   }
@@ -35,29 +37,60 @@ export class EventsListComponent implements OnInit, OnChanges {
   loadEvents(): void {
     this.loading = true;
     this.error = '';
-    
-    this.eventService.getEvents().subscribe({
+
+    if (this.selectedEventTypeId) {
+      this.loadEventsByEventType();
+    } else {
+      this.eventService.getEvents().subscribe({
+        next: (events) => {
+          this.events = events;
+          this.filterEvents();
+          this.loading = false;
+        },
+        error: (error) => {
+          this.error = 'Failed to load events. Please try again.';
+          this.loading = false;
+          console.error('Error loading events:', error);
+        }
+      });
+    }
+  }
+
+  loadEventsByEventType(): void {
+    if (!this.selectedEventTypeId) return;
+
+    this.eventService.getEventsByEventType(this.selectedEventTypeId).subscribe({
       next: (events) => {
         this.events = events;
         this.filterEvents();
         this.loading = false;
       },
       error: (error) => {
-        this.error = 'Failed to load events. Please try again.';
+        this.error = 'Failed to load events by event type. Please try again.';
         this.loading = false;
-        console.error('Error loading events:', error);
+        console.error('Error loading events by event type:', error);
       }
     });
   }
 
   filterEvents(): void {
-    if (!this.selectedCategory) {
-      this.filteredEvents = this.events;
-    } else {
-      this.filteredEvents = this.events.filter(event => 
+    let filtered = this.events;
+
+    // Filter by category if selected
+    if (this.selectedCategory) {
+      filtered = filtered.filter(event =>
         event.category && event.category.id === this.selectedCategory!.id
       );
     }
+
+    // Filter by event type if selected (additional filtering on already loaded events)
+    if (this.selectedEventTypeId) {
+      filtered = filtered.filter(event =>
+        event.eventType && event.eventType.id === this.selectedEventTypeId
+      );
+    }
+
+    this.filteredEvents = filtered;
   }
 
   onEventClick(event: Event): void {
@@ -83,4 +116,8 @@ export class EventsListComponent implements OnInit, OnChanges {
   getCategoryName(category: Category | undefined): string {
     return category ? category.name : '';
   }
-} 
+
+  getEventTypeName(eventType: any): string {
+    return eventType ? eventType.name : '';
+  }
+}
