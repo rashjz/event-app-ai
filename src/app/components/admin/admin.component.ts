@@ -31,6 +31,7 @@ export class AdminComponent implements OnInit {
   newEventType: EventType = {
     name: ''
   };
+  currentEventTypeName: string = '';
 
   quillConfig = {
     theme: 'snow',
@@ -162,6 +163,7 @@ export class AdminComponent implements OnInit {
     this.isEditingEventType = false;
     this.selectedEvent = null;
     this.selectedEventType = null;
+    this.currentEventTypeName = '';
   }
 
   formatDate(dateString: string): string {
@@ -177,6 +179,7 @@ export class AdminComponent implements OnInit {
     this.isAddingEventType = true;
     this.isEditingEventType = false;
     this.selectedEventType = null;
+    this.currentEventTypeName = '';
     this.newEventType = {
       name: ''
     };
@@ -184,6 +187,7 @@ export class AdminComponent implements OnInit {
 
   editEventType(eventType: EventType): void {
     this.selectedEventType = { ...eventType };
+    this.currentEventTypeName = eventType.name;
     this.isEditingEventType = true;
     this.isAddingEventType = false;
   }
@@ -204,11 +208,19 @@ export class AdminComponent implements OnInit {
   }
 
   saveEventType(): void {
+    const trimmedName = this.currentEventTypeName.trim();
+    if (!trimmedName) {
+      alert('Event type name cannot be empty.');
+      return;
+    }
     if (this.isAddingEventType) {
+      this.newEventType.name = trimmedName;
       this.eventTypeService.createEventType(this.newEventType).subscribe({
         next: () => {
           this.loadEventTypes();
           this.isAddingEventType = false;
+          this.currentEventTypeName = '';
+          this.newEventType = { name: '' };
           alert('Event type added successfully!');
         },
         error: (error) => {
@@ -217,11 +229,13 @@ export class AdminComponent implements OnInit {
         }
       });
     } else if (this.isEditingEventType && this.selectedEventType) {
+      this.selectedEventType.name = trimmedName;
       this.eventTypeService.updateEventType(this.selectedEventType.id!, this.selectedEventType).subscribe({
         next: () => {
           this.loadEventTypes();
           this.isEditingEventType = false;
           this.selectedEventType = null;
+          this.currentEventTypeName = '';
           alert('Event type updated successfully!');
         },
         error: (error) => {

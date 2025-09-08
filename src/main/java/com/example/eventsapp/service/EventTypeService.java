@@ -23,12 +23,18 @@ public class EventTypeService {
     }
 
     public EventType createEventType(EventType eventType) {
+        if (eventType.getName() == null || eventType.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Event type name cannot be null or empty");
+        }
         return repository.save(eventType);
     }
 
     public EventType updateEventType(EventType eventType) {
         if (!repository.existsById(eventType.getId())) {
             throw new RuntimeException("EventType not found with id: " + eventType.getId());
+        }
+        if (eventType.getName() == null || eventType.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Event type name cannot be null or empty");
         }
         return repository.save(eventType);
     }

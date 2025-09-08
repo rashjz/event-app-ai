@@ -2,6 +2,8 @@ package com.example.eventsapp.controller;
 
 import com.example.eventsapp.model.EventType;
 import com.example.eventsapp.service.EventTypeService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -26,14 +28,24 @@ public class EventTypeController {
     }
 
     @PostMapping
-    public EventType createEventType(@RequestBody EventType eventType) {
-        return service.createEventType(eventType);
+    public ResponseEntity<EventType> createEventType(@RequestBody EventType eventType) {
+        try {
+            EventType created = service.createEventType(eventType);
+            return ResponseEntity.status(HttpStatus.CREATED).body(created);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping("/{id}")
-    public EventType updateEventType(@PathVariable Long id, @RequestBody EventType eventType) {
+    public ResponseEntity<EventType> updateEventType(@PathVariable Long id, @RequestBody EventType eventType) {
         eventType.setId(id);
-        return service.updateEventType(eventType);
+        try {
+            EventType updated = service.updateEventType(eventType);
+            return ResponseEntity.ok(updated);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @DeleteMapping("/{id}")
