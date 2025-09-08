@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { QuillModule } from 'ngx-quill';
@@ -16,6 +16,7 @@ import { CategoryManagementComponent } from './components/category-management/ca
 import { FaqComponent } from './components/faq/faq.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
+import { SearchOverlayComponent } from './components/search-overlay/search-overlay.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -37,12 +38,14 @@ const routes: Routes = [
     CategoryManagementComponent,
     FaqComponent,
     PrivacyPolicyComponent,
-    TermsConditionsComponent
+    TermsConditionsComponent,
+    SearchOverlayComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
     QuillModule.forRoot()
   ],

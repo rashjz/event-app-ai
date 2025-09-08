@@ -12,6 +12,7 @@ import { EventType } from '../../models/event-type';
 })
 export class MainPageComponent implements OnInit {
   showChat = false;
+  showSearch = false;
   categories: Category[] = [];
   eventTypes: EventType[] = [];
   selectedCategory: Category | null = null;
@@ -63,6 +64,14 @@ export class MainPageComponent implements OnInit {
 
   toggleChat(): void {
     this.showChat = !this.showChat;
+  }
+
+  toggleSearch(): void {
+    this.showSearch = !this.showSearch;
+  }
+
+  closeSearch(): void {
+    this.showSearch = false;
   }
 
   onEventAdded(): void {

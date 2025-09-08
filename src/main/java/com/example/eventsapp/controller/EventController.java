@@ -4,6 +4,7 @@ import com.example.eventsapp.model.Event;
 import com.example.eventsapp.service.EventService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/events")
@@ -44,5 +45,28 @@ public class EventController {
     @GetMapping("/event-type/{eventTypeId}")
     public List<Event> getEventsByEventType(@PathVariable Long eventTypeId) {
         return service.getEventsByEventType(eventTypeId);
+    }
+
+    @GetMapping("/search")
+    public List<Event> searchEvents(@RequestParam Map<String, String> params) {
+        String q = params.get("q");
+        String category = params.get("category");
+        String eventType = params.get("eventType");
+        String date = params.get("date");
+        String location = params.get("location");
+
+        if (q == null || q.trim().isEmpty()) {
+            return List.of(); // Return empty list for empty query
+        }
+
+        return service.searchEvents(q, category, eventType, date, location);
+    }
+
+    @GetMapping("/search/autocomplete")
+    public List<String> getAutocompleteSuggestions(@RequestParam(required = false) String q) {
+        if (q == null || q.trim().isEmpty()) {
+            return List.of();
+        }
+        return service.getAutocompleteSuggestions(q);
     }
 }
