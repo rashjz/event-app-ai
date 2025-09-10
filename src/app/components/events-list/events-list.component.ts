@@ -29,7 +29,9 @@ export class EventsListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('EventsList ngOnChanges:', changes);
     if (changes['selectedCategory'] || changes['selectedEventTypeId']) {
+      console.log('EventsList: selectedEventTypeId changed to:', this.selectedEventTypeId);
       this.filterEvents();
     }
   }

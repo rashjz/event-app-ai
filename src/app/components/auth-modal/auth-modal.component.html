@@ -1,0 +1,86 @@
+<div class="auth-modal-overlay" *ngIf="isVisible">
+  <div class="auth-modal">
+    <div class="auth-modal-header">
+      <h2>{{ isLogin ? 'Sign In' : 'Sign Up' }}</h2>
+      <button class="close-btn" (click)="closeModal()">&times;</button>
+    </div>
+
+    <div class="auth-modal-body">
+      <div class="oauth-buttons">
+        <button class="oauth-btn google-btn" (click)="onGoogleLogin()">
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" />
+          Continue with Google
+        </button>
+        <button class="oauth-btn facebook-btn" (click)="onFacebookLogin()">
+          <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="Facebook" />
+          Continue with Facebook
+        </button>
+      </div>
+
+      <div class="divider">
+        <span>or</span>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" #authForm="ngForm">
+        <div class="form-group" *ngIf="!isLogin">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="name"
+            name="name"
+            required
+            #nameInput="ngModel"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="email"
+            name="email"
+            required
+            email
+            #emailInput="ngModel"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            required
+            minlength="6"
+            #passwordInput="ngModel"
+          />
+        </div>
+
+        <div class="error-message" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="!authForm.valid"
+        >
+          {{ isLogin ? 'Sign In' : 'Sign Up' }}
+        </button>
+      </form>
+
+      <div class="toggle-mode">
+        <p>
+          {{ isLogin ? "Don't have an account?" : "Already have an account?" }}
+          <a href="#" (click)="toggleMode($event)">
+            {{ isLogin ? 'Sign Up' : 'Sign In' }}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

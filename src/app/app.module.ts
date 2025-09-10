@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { QuillModule } from 'ngx-quill';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 import { AppComponent } from './app.component';
 import { EventsListComponent } from './components/events-list/events-list.component';
@@ -17,6 +18,9 @@ import { FaqComponent } from './components/faq/faq.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
 import { SearchOverlayComponent } from './components/search-overlay/search-overlay.component';
+import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
+import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
+import { SharedNavbarComponent } from './components/shared-navbar/shared-navbar.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -39,7 +43,10 @@ const routes: Routes = [
     FaqComponent,
     PrivacyPolicyComponent,
     TermsConditionsComponent,
-    SearchOverlayComponent
+    SearchOverlayComponent,
+    AuthModalComponent,
+    ProfileDropdownComponent,
+    SharedNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,13 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     QuillModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

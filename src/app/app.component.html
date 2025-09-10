@@ -1,10 +1,24 @@
 <div class="app-container">
-  <header class="app-header">
-  </header>
-  
+  <app-shared-navbar
+    (openAuthModal)="openAuthModal()"
+    (toggleSearch)="toggleSearch()"
+    (logout)="onLogout()"
+    (eventTypeSelected)="selectEventType($event)">
+  </app-shared-navbar>
+
   <main class="app-main">
     <router-outlet></router-outlet>
   </main>
+
+  <app-auth-modal
+    [isVisible]="isAuthModalVisible"
+    (close)="closeAuthModal()">
+  </app-auth-modal>
+
+  <app-search-overlay
+    *ngIf="showSearch"
+    (close)="closeSearch()">
+  </app-search-overlay>
 
   <footer class="app-footer">
     <div class="footer-content">

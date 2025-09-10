@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/event.service';
-import { CategoryService } from '../../services/category.service';
+import { EventFilterService } from '../../services/event-filter.service';
 import { Event } from '../../models/event';
 import { Category } from '../../models/category';
+import { EventType } from '../../models/event-type';
 
 @Component({
   selector: 'app-event-detail',
@@ -14,16 +15,13 @@ export class EventDetailComponent implements OnInit {
   event: Event | null = null;
   loading = false;
   error = '';
-  menuOpen = false;
-  categories: Category[] = [];
-  selectedCategory: Category | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private eventService: EventService,
-    private categoryService: CategoryService
-  ) { }
+    private eventFilterService: EventFilterService
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -37,11 +35,11 @@ export class EventDetailComponent implements OnInit {
     this.error = '';
 
     this.eventService.getEvent(id).subscribe({
-      next: (event) => {
+      next: (event: Event) => {
         this.event = event;
         this.loading = false;
       },
-      error: (error) => {
+      error: (error: any) => {
         this.error = 'Failed to load event details. Please try again.';
         this.loading = false;
         console.error('Error loading event:', error);
@@ -51,16 +49,6 @@ export class EventDetailComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/']);
-  }
-
-  getEventTypeIcon(type: string): string {
-    switch (type.toLowerCase()) {
-      case 'movie': return '🎬';
-      case 'concert': return '🎵';
-      case 'event': return '🎉';
-      case 'custom': return '📝';
-      default: return '📅';
-    }
   }
 
   onImageError(event: any): void {
@@ -76,19 +64,13 @@ export class EventDetailComponent implements OnInit {
     return eventType ? eventType.name : '';
   }
 
-  toggleMenu(): void {
-    this.menuOpen = !this.menuOpen;
-  }
-
-  closeMenu(): void {
-    this.menuOpen = false;
-  }
-
-  selectCategory(category: Category | null): void {
-    this.selectedCategory = category;
-  }
-
-  goToMainPage(): void {
+  onEventTypeClick(eventType: EventType): void {
+    console.log('Event type clicked:', eventType);
+    // Set the selected event type in the filter service
+    this.eventFilterService.setSelectedEventType(eventType);
+    console.log('Event type set in filter service');
+    // Navigate to main page where the filtered events will be loaded
     this.router.navigate(['/']);
+    console.log('Navigation to main page completed');
   }
 }

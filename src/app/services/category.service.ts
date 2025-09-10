@@ -7,7 +7,7 @@ import { Category } from '../models/category';
   providedIn: 'root'
 })
 export class CategoryService {
-  private apiUrl = 'http://localhost:8080/api/categories';
+  private apiUrl = '/api/categories';
 
   constructor(private http: HttpClient) { }
 
@@ -34,4 +34,4 @@ export class CategoryService {
   deleteCategory(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
-} 
+}

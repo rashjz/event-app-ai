@@ -1,0 +1,29 @@
+<div class="profile-dropdown" [class.open]="isDropdownOpen" *ngIf="user">
+  <button class="profile-btn" (click)="toggleDropdown()">
+    <img
+      *ngIf="user && user.profilePictureUrl"
+      [src]="user.profilePictureUrl"
+      alt="Profile"
+      class="profile-pic"
+    />
+    <div *ngIf="!user || !user.profilePictureUrl" class="profile-placeholder">
+      {{ (user.name?.charAt(0) || user.email?.charAt(0) || '') | uppercase }}
+    </div>
+    <span class="profile-name">{{ user.name || user.email }}</span>
+    <span class="dropdown-arrow">▼</span>
+  </button>
+
+  <div class="dropdown-menu" *ngIf="isDropdownOpen">
+    <div class="dropdown-item">
+      <strong>{{ user.name }}</strong>
+      <div class="email">{{ user.email }}</div>
+    </div>
+    <hr />
+    <a href="#" class="dropdown-item" (click)="closeDropdown()">Profile</a>
+    <a href="#" class="dropdown-item" (click)="closeDropdown()">My Saved Events</a>
+    <hr />
+    <a href="#" class="dropdown-item logout" (click)="onLogout()">Logout</a>
+  </div>
+</div>
+
+<div class="dropdown-overlay" *ngIf="isDropdownOpen" (click)="closeDropdown()"></div>
