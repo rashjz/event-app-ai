@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Get the token from localStorage
-    const token = this.authService.getToken();
+    // Get the token directly from localStorage to avoid circular dependency
+    const token = localStorage.getItem('token');
 
     // Add the token to the request headers if it exists and the request is to our API
     if (token && request.url.includes('/api/')) {

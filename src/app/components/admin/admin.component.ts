@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Event } from '../../models/event';
 import { Category } from '../../models/category';
 import { EventType } from '../../models/event-type';
+import { User } from '../../models/user';
 import { EventService } from '../../services/event.service';
 import { CategoryService } from '../../services/category.service';
 import { EventTypeService } from '../../services/event-type.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
@@ -15,13 +17,14 @@ export class AdminComponent implements OnInit {
   events: Event[] = [];
   categories: Category[] = [];
   eventTypes: EventType[] = [];
+  users: User[] = [];
   selectedEvent: Event | null = null;
   selectedEventType: EventType | null = null;
   isEditing = false;
   isAdding = false;
   isAddingEventType = false;
   isEditingEventType = false;
-  activeTab: 'events' | 'categories' | 'event-types' = 'events';
+  activeTab: 'events' | 'categories' | 'event-types' | 'users' = 'events';
   newEvent: Event = {
     title: '',
     description: '',
@@ -37,35 +40,46 @@ export class AdminComponent implements OnInit {
     theme: 'snow',
     modules: {
       toolbar: [
-        ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'code-block'],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'script': 'sub'}, { 'script': 'super' }],
-        [{ 'indent': '-1'}, { 'indent': '+1' }],
-        [{ 'direction': 'rtl' }],
-        [{ 'size': ['small', false, 'large', 'huge'] }],
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
         [{ 'color': [] }, { 'background': [] }],
-        [{ 'font': [] }],
+        [{ 'script': 'sub'}, { 'script': 'super' }],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'indent': '-1'}, { 'indent': '+1' }],
         [{ 'align': [] }],
+        ['blockquote', 'code-block'],
+        ['link', 'image', 'video'],
+        [{ 'font': [] }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'direction': 'rtl' }],
         ['clean']
       ]
     },
     placeholder: 'Enter event description...',
     readOnly: false,
-    bounds: document.body
+    bounds: document.body,
+    formats: [
+      'header', 'font', 'size',
+      'bold', 'italic', 'underline', 'strike', 'blockquote',
+      'list', 'bullet', 'indent',
+      'link', 'image', 'video',
+      'color', 'background',
+      'align', 'script', 'direction'
+    ]
   };
 
   constructor(
     private eventService: EventService,
     private categoryService: CategoryService,
-    private eventTypeService: EventTypeService
+    private eventTypeService: EventTypeService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     this.loadEvents();
     this.loadCategories();
     this.loadEventTypes();
+    this.loadUsers();
   }
 
   loadEvents(): void {
@@ -89,7 +103,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  setActiveTab(tab: 'events' | 'categories' | 'event-types'): void {
+  setActiveTab(tab: 'events' | 'categories' | 'event-types' | 'users'): void {
     this.activeTab = tab;
     this.cancel();
   }
@@ -248,5 +262,41 @@ export class AdminComponent implements OnInit {
 
   getEventTypeName(eventType: EventType | undefined): string {
     return eventType ? eventType.name : '-';
+  }
+
+  // User Management Methods
+  loadUsers(): void {
+    this.http.get<User[]>('/api/admin/users').subscribe({
+      next: (users) => {
+        console.log('Loaded users:', users);
+        this.users = users;
+      },
+      error: (error) => {
+        console.error('Error loading users:', error);
+        alert('Error loading users. Please check your authentication.');
+      }
+    });
+  }
+
+  toggleUserStatus(user: User): void {
+    if (!user.id) return;
+
+    const action = user.active ? 'deactivate' : 'activate';
+    const confirmMessage = `Are you sure you want to ${action} user "${user.name || user.email}"?`;
+
+    if (confirm(confirmMessage)) {
+      const url = `/api/admin/users/${user.id}/${action}`;
+      this.http.put(url, {}, { responseType: 'text' }).subscribe({
+        next: (response) => {
+          console.log(`${action} response:`, response);
+          this.loadUsers();
+          alert(`User ${action}d successfully!`);
+        },
+        error: (error) => {
+          console.error(`Error ${action}ing user:`, error);
+          alert(`Error ${action}ing user. Please try again.`);
+        }
+      });
+    }
   }
 }

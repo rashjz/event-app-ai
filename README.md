@@ -47,7 +47,7 @@ This project is a full-stack events management application built with a Java (Sp
    ```
 3. **Run the Angular app:**
    ```sh
-   ng serve
+   ng serve --proxy-config src/proxy.conf.json
    ```
 4. The frontend will be available at [http://localhost:4200](http://localhost:4200) by default.
 

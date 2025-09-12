@@ -4,30 +4,40 @@
     <a routerLink="/" class="back-link">← Back to Website</a>
   </div>
 
-  <!-- Navigation Tabs -->
-  <div class="admin-tabs">
-    <button
-      class="tab-button"
-      [class.active]="activeTab === 'events'"
-      (click)="setActiveTab('events')">
-      Event Management
-    </button>
-    <button
-      class="tab-button"
-      [class.active]="activeTab === 'categories'"
-      (click)="setActiveTab('categories')">
-      Category Management
-    </button>
-    <button
-      class="tab-button"
-      [class.active]="activeTab === 'event-types'"
-      (click)="setActiveTab('event-types')">
-      Event Type Management
-    </button>
-  </div>
+  <!-- Main Layout Container -->
+  <div class="admin-layout">
+    <!-- Navigation Tabs -->
+    <div class="admin-tabs">
+      <button
+        class="tab-button"
+        [class.active]="activeTab === 'events'"
+        (click)="setActiveTab('events')">
+        Event Management
+      </button>
+      <button
+        class="tab-button"
+        [class.active]="activeTab === 'categories'"
+        (click)="setActiveTab('categories')">
+        Category Management
+      </button>
+      <button
+        class="tab-button"
+        [class.active]="activeTab === 'event-types'"
+        (click)="setActiveTab('event-types')">
+        Event Type Management
+      </button>
+      <button
+        class="tab-button"
+        [class.active]="activeTab === 'users'"
+        (click)="setActiveTab('users')">
+        User Management
+      </button>
+    </div>
 
-  <!-- Event Management Tab -->
-  <div *ngIf="activeTab === 'events'" class="tab-content">
+    <!-- Tab Content Container -->
+    <div class="tab-content-container">
+      <!-- Event Management Tab -->
+      <div *ngIf="activeTab === 'events'" class="tab-content">
     <div class="admin-header">
       <h1>Event Management</h1>
       <button class="add-button" (click)="addEvent()" *ngIf="!isAdding && !isEditing">
@@ -175,13 +185,13 @@
     </div>
   </div>
 
-  <!-- Category Management Tab -->
-  <div *ngIf="activeTab === 'categories'" class="tab-content">
-    <app-category-management></app-category-management>
-  </div>
+      <!-- Category Management Tab -->
+      <div *ngIf="activeTab === 'categories'" class="tab-content">
+        <app-category-management></app-category-management>
+      </div>
 
-  <!-- Event Type Management Tab -->
-  <div *ngIf="activeTab === 'event-types'" class="tab-content">
+      <!-- Event Type Management Tab -->
+      <div *ngIf="activeTab === 'event-types'" class="tab-content">
     <div class="admin-header">
       <h1>Event Type Management</h1>
       <button class="add-button" (click)="addEventType()" *ngIf="!isAddingEventType && !isEditingEventType">
@@ -246,6 +256,59 @@
     <!-- Empty State -->
     <div class="empty-state" *ngIf="eventTypes.length === 0 && !isAddingEventType && !isEditingEventType">
       <p>No event types found. Click "Add New Event Type" to create your first event type.</p>
+    </div>
+      </div>
+
+      <!-- User Management Tab -->
+      <div *ngIf="activeTab === 'users'" class="tab-content">
+        <div class="admin-header">
+          <h1>User Management</h1>
+        </div>
+
+        <!-- Users List -->
+        <div class="events-table">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Provider</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name || '-' }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.provider }}</td>
+                <td>
+                  <span class="status-badge" [class.active]="user.active" [class.inactive]="!user.active">
+                    {{ user.active ? 'Active' : 'Inactive' }}
+                  </span>
+                </td>
+                <td>{{ formatDate(user.createdAt) }}</td>
+                <td class="actions">
+                  <button
+                    class="edit-button"
+                    (click)="toggleUserStatus(user)"
+                    [disabled]="user.active === null">
+                    {{ user.active ? 'Deactivate' : 'Activate' }}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="users.length === 0">
+          <p>No users found.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

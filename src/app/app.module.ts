@@ -21,6 +21,7 @@ import { SearchOverlayComponent } from './components/search-overlay/search-overl
 import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
 import { SharedNavbarComponent } from './components/shared-navbar/shared-navbar.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -46,7 +47,8 @@ const routes: Routes = [
     SearchOverlayComponent,
     AuthModalComponent,
     ProfileDropdownComponent,
-    SharedNavbarComponent
+    SharedNavbarComponent,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,

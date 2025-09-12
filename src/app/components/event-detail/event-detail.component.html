@@ -23,6 +23,16 @@
         <h3>About this event</h3>
         <p [innerHTML]="event.description"></p>
       </div>
+
+      <!-- Star Rating Component -->
+      <div class="event-rating" *ngIf="event?.id">
+        <app-star-rating
+          [eventId]="event.id!"
+          [readonly]="false"
+          [showStats]="true"
+          (ratingSubmitted)="onRatingSubmitted($event)">
+        </app-star-rating>
+      </div>
     </div>
   </div>
 </div>

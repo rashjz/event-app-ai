@@ -34,6 +34,9 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Column(name = "active")
+    private Boolean active = true; // Default to active
+
     // Constructors
     public User() {}
 
@@ -74,6 +77,9 @@ public class User {
 
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 
     @PreUpdate
     public void preUpdate() {

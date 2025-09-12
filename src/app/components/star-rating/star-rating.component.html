@@ -1,0 +1,38 @@
+<div class="star-rating-container">
+  <!-- Rating Stats -->
+  <div *ngIf="showStats" class="rating-stats">
+    <div class="average-rating">
+      <span class="stars-display">
+        <span *ngFor="let star of stars" class="star" [class.filled]="star <= averageRating">
+          ★
+        </span>
+      </span>
+      <span class="rating-text">{{ getRatingText() }}</span>
+    </div>
+  </div>
+
+  <!-- Interactive Rating -->
+  <div *ngIf="isLoggedIn && !readonly" class="interactive-rating">
+    <div class="rating-prompt">Rate this event:</div>
+    <div class="stars-interactive" [class.loading]="isLoading">
+      <span
+        *ngFor="let star of stars"
+        class="star interactive-star"
+        [class.active]="isStarActive(star)"
+        (click)="rate(star)"
+        (mouseenter)="hoverStar = star"
+        (mouseleave)="hoverStar = 0"
+        [class.hover]="hoverStar >= star">
+        ★
+      </span>
+    </div>
+    <div *ngIf="userRating > 0" class="user-rating">
+      Your rating: {{ userRating }} star{{ userRating !== 1 ? 's' : '' }}
+    </div>
+  </div>
+
+  <!-- Login Prompt -->
+  <div *ngIf="!isLoggedIn && !readonly" class="login-prompt">
+    <p>Please <a href="/login">log in</a> to rate this event</p>
+  </div>
+</div>

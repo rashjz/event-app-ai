@@ -5,6 +5,7 @@ import { EventFilterService } from '../../services/event-filter.service';
 import { Event } from '../../models/event';
 import { Category } from '../../models/category';
 import { EventType } from '../../models/event-type';
+import { EventWithRating } from '../../models/rating';
 
 @Component({
   selector: 'app-event-detail',
@@ -35,8 +36,13 @@ export class EventDetailComponent implements OnInit {
     this.error = '';
 
     this.eventService.getEvent(id).subscribe({
-      next: (event: Event) => {
-        this.event = event;
+      next: (response: any) => {
+        // Handle both old format (Event) and new format (EventWithRating)
+        if (response.event) {
+          this.event = response.event;
+        } else {
+          this.event = response;
+        }
         this.loading = false;
       },
       error: (error: any) => {
@@ -72,5 +78,11 @@ export class EventDetailComponent implements OnInit {
     // Navigate to main page where the filtered events will be loaded
     this.router.navigate(['/']);
     console.log('Navigation to main page completed');
+  }
+
+  onRatingSubmitted(ratingResponse: any): void {
+    console.log('Rating submitted:', ratingResponse);
+    // The star rating component handles the UI updates automatically
+    // We could add additional logic here if needed (e.g., show a success message)
   }
 }

@@ -39,6 +39,8 @@ public class SecurityConfig {
             .and()
             .authorizeRequests()
                 .antMatchers("/api/auth/**", "/oauth2/**", "/login/**", "/h2-console/**", "/api/categories/**", "/api/event-types/**", "/api/events/**").permitAll()
+                .antMatchers("/api/ratings/**").authenticated()
+                .antMatchers("/api/admin/**").authenticated()
                 .anyRequest().authenticated()
             .and()
             .oauth2Login()

@@ -1,0 +1,114 @@
+.star-rating-container {
+  margin: 20px 0;
+}
+
+.rating-stats {
+  margin-bottom: 15px;
+}
+
+.average-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stars-display {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: 20px;
+  color: #ddd;
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.rating-text {
+  font-size: 14px;
+  color: #666;
+  margin-left: 8px;
+}
+
+.interactive-rating {
+  margin-top: 15px;
+}
+
+.rating-prompt {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.stars-interactive {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.interactive-star {
+  font-size: 24px;
+  color: #ddd;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.interactive-star:hover,
+.interactive-star.active,
+.interactive-star.hover {
+  color: #ffc107;
+  transform: scale(1.1);
+}
+
+.stars-interactive.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.user-rating {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+.login-prompt {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.login-prompt a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-prompt a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .star {
+    font-size: 18px;
+  }
+
+  .interactive-star {
+    font-size: 22px;
+  }
+
+  .average-rating {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .rating-text {
+    margin-left: 0;
+  }
+}

@@ -29,4 +29,9 @@ public class CustomUserDetailsService implements UserDetailsService {
                 new ArrayList<>() // No authorities for now
         );
     }
+
+    public User getUserByEmail(String email) throws UsernameNotFoundException {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+    }
 }
