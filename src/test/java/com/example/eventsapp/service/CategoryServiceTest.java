@@ -47,7 +47,7 @@ public class CategoryServiceTest {
         // Assert
         assertEquals(expectedCategories, actualCategories);
         assertEquals(1, actualCategories.size());
-        assertEquals("Music", actualCategories.get(0).getName());
+        assertEquals("Music", actualCategories.getFirst().getName());
         verify(categoryRepository, times(1)).findAll();
     }
 

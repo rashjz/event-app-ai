@@ -57,7 +57,7 @@ public class EventServiceTest {
         // Assert
         assertEquals(expectedEvents, actualEvents);
         assertEquals(1, actualEvents.size());
-        assertEquals("Test Concert", actualEvents.get(0).getTitle());
+        assertEquals("Test Concert", actualEvents.getFirst().getTitle());
         verify(eventRepository, times(1)).findAll();
     }
 
