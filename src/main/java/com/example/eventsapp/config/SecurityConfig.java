@@ -30,23 +30,21 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors().configurationSource(corsConfigurationSource())
-            .and()
-            .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .authorizeRequests()
-                .antMatchers("/api/auth/**", "/oauth2/**", "/login/**", "/h2-console/**", "/api/categories/**", "/api/event-types/**", "/api/events/**").permitAll()
-                .antMatchers("/api/ratings/**").authenticated()
-                .antMatchers("/api/admin/**").authenticated()
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/api/auth/**", "/oauth2/**", "/login/**", "/h2-console/**", "/api/categories/**", "/api/event-types/**", "/api/events/**").permitAll()
+                .requestMatchers("/api/ratings/**").authenticated()
+                .requestMatchers("/api/admin/**").authenticated()
                 .anyRequest().authenticated()
-            .and()
-            .oauth2Login()
-                .userInfoEndpoint()
+            )
+            .oauth2Login(oauth2 -> oauth2
+                .userInfoEndpoint(userInfo -> userInfo
                     .userService(customOAuth2UserService)
-                .and()
+                )
                 .successHandler((request, response, authentication) -> {
                     // Handle successful OAuth login - generate JWT token and redirect to Angular app
                     OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
@@ -57,17 +55,17 @@ public class SecurityConfig {
                 .failureHandler((request, response, exception) -> {
                     response.sendRedirect("/login?error");
                 })
-            .and()
+            )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         // For H2 console
-        http.headers().frameOptions().disable();
+        http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
 
         return http.build();
     }
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
@@ -80,7 +78,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
