@@ -1,6 +1,9 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: upgrade-spring-boot-3-3
-displayName: Upgrade Spring Boot to 3.3.x
-description: Apply OpenRewrite recipe to upgrade Spring Boot to 3.3.x
+name: upgrade-parent-to-3-4
+displayName: Upgrade Spring Boot parent to 3.4.x
+description: Upgrade the parent version to Spring Boot 3.4.x using UpgradeParentVersion recipe
 recipeList:
-  - org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_3
+  - org.openrewrite.maven.UpgradeParentVersion:
+      groupId: org.springframework.boot
+      artifactId: spring-boot-starter-parent
+      newVersion: 3.4.6
